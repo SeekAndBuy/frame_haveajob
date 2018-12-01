@@ -26,11 +26,12 @@ public class ProductJobService extends GenericService<Job>
 	@Autowired
 	private JobDao productDao;
 	
-	SearchBeer searchBeer = new SearchBeer();
+	//MUDAR DEPOIS ----------------- Nome
+	SearchBeer searchJob = new SearchBeer();
 	
-	public List<Job> listItemByUserCharacteristic(CandidateUser user, List<Job> allBeers){
+	public List<Job> listItemByUserCharacteristic(CandidateUser user, List<Job> allJobs){
 
-		return searchBeer.ListAllProductsByUser(user, allBeers);
+		return searchJob.ListAllProductsByUser(user, allJobs);
 	}
 	
 	@Override
@@ -42,22 +43,22 @@ public class ProductJobService extends GenericService<Job>
 	@Override
 	public Optional<Job> findItem(Long id)
 	{
-		Optional<Job> promotion = productDao.findById(id);
+		Optional<Job> job = productDao.findById(id);
 		
-		if(promotion == null)
+		if(job == null)
 		{
 			throw new ProductNotFoundException("Job can not be found");
 		}
 		
-		return promotion;
+		return job;
 	}
 	
 	public Job createItemAndNotifyUser(Job product, List<CandidateUser> listOfUsers) {
 		NotificationBeer notificationBeer = new NotificationBeer();
-		Job beer = this.createItem(product);
+		Job job = this.createItem(product);
 		
 		notificationBeer.sendNotification(product, listOfUsers);
-		return beer;
+		return job;
 	}
 	
 	@Override
@@ -77,7 +78,7 @@ public class ProductJobService extends GenericService<Job>
 		}
 		catch(EmptyResultDataAccessException e)
 		{
-			throw new ProductNotFoundException("Jog can not be found");
+			throw new ProductNotFoundException("Job can not be found");
 		}
 	}
 	
@@ -88,16 +89,15 @@ public class ProductJobService extends GenericService<Job>
 		productDao.save(job);
 	}
 	
-
 	@Override
 	public void verifyExistence(Job job)
 	{
 		findItem(job.getId());
 	}
 	
-	public List<Job> getPromotionByUserId(Long id) 
+	public List<Job> getJobByCandidateId(Long id) 
 	{
-		return productDao.getPromotionByUserId(id);
+		return productDao.getJobByCandidateId(id);
 	}
 	
 }

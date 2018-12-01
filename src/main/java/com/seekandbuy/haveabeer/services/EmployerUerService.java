@@ -52,7 +52,7 @@ public class EmployerUerService extends GenericService<EmployerUser>
 	public EmployerUser createItem(EmployerUser user) 
 	{	
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
-		user.getBeerCharacteristic().setId(null);		
+		//user.getJobCharacteristic().setId(null);		
 
 		String password = user.getPassword();
 				

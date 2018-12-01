@@ -17,14 +17,14 @@ public class CandidateUser extends User {
 	@JsonInclude(Include.NON_NULL)
 	@Cascade(CascadeType.PERSIST)
 	@ManyToOne
-	JobCharacteristic beerCharacteristic;
+	JobCharacteristic jobCharacteristic;
 	
-	public JobCharacteristic getBeerCharacteristic() {
-		return beerCharacteristic;
+	public JobCharacteristic getJobCharacteristic() {
+		return jobCharacteristic;
 	}
 	
-	public void setBeerCharacteristic(JobCharacteristic beerCharacteristic) {
-		this.beerCharacteristic = beerCharacteristic;
+	public void setJobCharacteristic(JobCharacteristic jobCharacteristic) {
+		this.jobCharacteristic = jobCharacteristic;
 	}
 	
 }

@@ -52,7 +52,7 @@ public class CandidateUerService extends GenericService<CandidateUser>
 	public CandidateUser createItem(CandidateUser user) 
 	{	
 		user.setId(null); //Garantir que criaremos uma instância nova e não atualizaremos nenhuma
-		user.getBeerCharacteristic().setId(null);		
+		user.getJobCharacteristic().setId(null);		
 
 		String password = user.getPassword();
 				

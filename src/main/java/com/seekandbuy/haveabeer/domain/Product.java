@@ -46,7 +46,6 @@ public abstract class Product {
 		this.date = data;
 	}
 
-	
 	public Address getAddress() {
 		return address;
 	}

@@ -33,7 +33,7 @@ import com.seekandbuy.haveabeer.services.CandidateUerService;
 
 
 @RestController
-@RequestMapping("/promotions")
+@RequestMapping("/jobs")
 @CrossOrigin(origins="http://localhost:4200")
 public class ProductJobResources implements GenericResources<Job>
 {
@@ -50,6 +50,7 @@ public class ProductJobResources implements GenericResources<Job>
 	}
 
 	@Override
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Job>> listItem() {
 		return ResponseEntity.status(HttpStatus.OK).body(productService.listItem());
 	}
@@ -79,17 +80,18 @@ public class ProductJobResources implements GenericResources<Job>
 	}
 
 	@Override
-	public ResponseEntity<Optional<Job>> findItem(Long id) {
-		Optional<Job> promotion = null;
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Optional<Job>> findItem(@PathVariable("id") Long id) {
+		Optional<Job> job = null;
 		try
 		{
-			promotion = productService.findItem(id);
+			job = productService.findItem(id);
 		}catch(ProductNotFoundException e)
 		{
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(promotion);
+		return ResponseEntity.status(HttpStatus.OK).body(job);
 	}
 
 	@Override
@@ -108,7 +110,8 @@ public class ProductJobResources implements GenericResources<Job>
 	}
 
 	@Override
-	public ResponseEntity<Void> updateItem(Job product, Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateItem(@RequestBody Job product, @PathVariable("id") Long id) {
 		product.setId(id); // Garantir que o que vai ser atualizado é o que está vindo na URI
 		try
 		{
@@ -122,37 +125,37 @@ public class ProductJobResources implements GenericResources<Job>
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<Job>> findPromotionByUserId(@PathVariable("id") Long id){
-		List<Job> userPromotions = null;
+	@RequestMapping(value = "/candidate/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Job>> getJobByCandidateId(@PathVariable("id") Long id){
+		List<Job> candidateJobsInterested = null;
 		
 		try
 		{
-			userPromotions = productService.getPromotionByUserId(id);
+			candidateJobsInterested = productService.getJobByCandidateId(id);
 		}
 		catch(UserNotFoundException e)
 		{
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(userPromotions);
+		return ResponseEntity.status(HttpStatus.OK).body(candidateJobsInterested);
 	}
 	
 	@RequestMapping(value = "/bycharacteristics/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<Job>> findBeerByUserCharacteristic(@PathVariable("id") Long id){
+	public ResponseEntity<List<Job>> findJobByCandidateCharacteristic(@PathVariable("id") Long id){
 		List<Job> productsByCharacteristic = null;
 		
-		List<Job> allBeers = null;
-		Optional<CandidateUser> userBeer = null;		
+		List<Job> allJobs = null;
+		Optional<CandidateUser> candidate = null;		
 		
 		try
 		{
-			userBeer = userService.findItem(id);
-			CandidateUser user = (CandidateUser) userBeer.get();
+			candidate = userService.findItem(id);
+			CandidateUser user = (CandidateUser) candidate.get();
 			
-			allBeers = productService.listItem();
+			allJobs = productService.listItem();
 			
-			productsByCharacteristic = productService.listItemByUserCharacteristic(user, allBeers);
+			productsByCharacteristic = productService.listItemByUserCharacteristic(user, allJobs);
 		}
 		catch(UserNotFoundException e)
 		{
@@ -160,10 +163,6 @@ public class ProductJobResources implements GenericResources<Job>
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(productsByCharacteristic);
-	}
-	
-	public static void main(String[] args) {
-		SpringApplication.run(HaveabeerApplication.class, args);
 	}
 	
 }
