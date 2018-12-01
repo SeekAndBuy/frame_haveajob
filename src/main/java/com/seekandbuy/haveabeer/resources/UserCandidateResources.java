@@ -29,17 +29,18 @@ import com.seekandbuy.haveabeer.services.CandidateUserService;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins="http://localhost:4200")
-public class UserBeerResources implements GenericResources<CandidateUser>
+public class UserCandidateResources implements GenericResources<CandidateUser>
 {	
 	@Autowired
 	private CandidateUserService userService;
 	
-	public UserBeerResources(CandidateUserService userService) 
+	public UserCandidateResources(CandidateUserService userService) 
 	{
 		this.userService = userService;
 	}
 
 	@Override
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CandidateUser>> listItem() {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.listItem());
 	}
@@ -86,7 +87,8 @@ public class UserBeerResources implements GenericResources<CandidateUser>
 	}
 
 	@Override
-	public ResponseEntity<Void> updateItem(CandidateUser user, Long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateItem(@RequestBody CandidateUser user,  @PathVariable("id") Long id) {
 		user.setId(id); // Garantir que o que vai ser atualizado é o que está vindo na URI
 		try
 		{

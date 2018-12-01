@@ -1,7 +1,7 @@
 package com.seekandbuy.haveabeer.services;
 
 import com.seekandbuy.haveabeer.match.SearchBeer;
-import com.seekandbuy.haveabeer.notification.NotificationBeer;
+import com.seekandbuy.haveabeer.notification.NotificationJob;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +54,7 @@ public class ProductJobService extends GenericService<Job>
 	}
 	
 	public Job createItemAndNotifyUser(Job product, List<CandidateUser> listOfUsers) {
-		NotificationBeer notificationBeer = new NotificationBeer();
+		NotificationJob notificationBeer = new NotificationJob();
 		Job job = this.createItem(product);
 		
 		notificationBeer.sendNotification(product, listOfUsers);
