@@ -1,5 +1,6 @@
 package com.seekandbuy.haveabeer.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,8 +18,21 @@ public class CandidateUser extends User {
 	@JsonInclude(Include.NON_NULL)
 	@Cascade(CascadeType.PERSIST)
 	@ManyToOne
-	JobCharacteristic jobCharacteristic;
+	private JobCharacteristic jobCharacteristic;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Cascade(CascadeType.PERSIST)
+	@Column(unique = true)
+	private String cpf;
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public JobCharacteristic getJobCharacteristic() {
 		return jobCharacteristic;
 	}

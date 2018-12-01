@@ -20,6 +20,22 @@ public class Job extends Product {
 	@ManyToOne
 	private JobCharacteristic jobCharacteristic;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Cascade(CascadeType.PERSIST)
+	@ManyToOne
+	private EmployerUser user;
+		
+	@JsonInclude(Include.NON_NULL)
+	private String tituloDaVaga;	
+	
+	public String getTituloDaVaga() {
+		return tituloDaVaga;
+	}
+
+	public void setTituloDaVaga(String tituloDaVaga) {
+		this.tituloDaVaga = tituloDaVaga;
+	}
+
 	public JobCharacteristic getJobCharacteristic() {
 		return jobCharacteristic;
 	}
@@ -27,12 +43,7 @@ public class Job extends Product {
 	public void setJobCharacteristic(JobCharacteristic jobCharacteristic) {
 		this.jobCharacteristic = jobCharacteristic;
 	}
-	
-	@JsonInclude(Include.NON_NULL)
-	@Cascade(CascadeType.PERSIST)
-	@ManyToOne
-	private EmployerUser user;
-	
+
 	public EmployerUser getUser() {
 		return user;
 	}

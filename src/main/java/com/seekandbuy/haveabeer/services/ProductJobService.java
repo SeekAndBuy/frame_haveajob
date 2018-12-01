@@ -1,6 +1,6 @@
 package com.seekandbuy.haveabeer.services;
 
-import com.seekandbuy.haveabeer.match.SearchBeer;
+import com.seekandbuy.haveabeer.match.SearchJob;
 import com.seekandbuy.haveabeer.notification.NotificationJob;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class ProductJobService extends GenericService<Job>
 	private JobDao productDao;
 	
 	//MUDAR DEPOIS ----------------- Nome
-	SearchBeer searchJob = new SearchBeer();
+	SearchJob searchJob = new SearchJob();
 	
 	public List<Job> listItemByUserCharacteristic(CandidateUser user, List<Job> allJobs){
 

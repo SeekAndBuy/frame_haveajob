@@ -17,30 +17,25 @@ import com.seekandbuy.haveabeer.domain.Job;
 import com.seekandbuy.haveabeer.domain.JobCharacteristic;
 import com.seekandbuy.haveabeer.domain.CandidateUser;
 
-public class SearchBeer extends SearchItems<CandidateUser, Job> {
+public class SearchJob extends SearchItems<CandidateUser, Job> {
 	
 	@Override
-	public List<Job> ListAllProductsByUser(CandidateUser user, List<Job> allBeers) {
-		//System.out.println(id);
-		//Optional<BeerUser> user = userDao.findById(id);
-		
-		//BeerUser userbeer = (BeerUser) user.get();
-		JobCharacteristic characteristicUser = user.getBeerCharacteristic();
-		
-		//System.out.println(characteristicUser.getBrand());
-		//System.out.println(characteristicUser.getPrice());
+	public List<Job> ListAllProductsByUser(CandidateUser user, List<Job> allJobs) {
+
+		JobCharacteristic characteristicUser = user.getJobCharacteristic();
+
 		
 		//classe para armazenar a tupla <product, quantidade de matchs>
 		class CharacteristicAndMatchs{
-			public Job beer;
+			public Job job;
 			public int matchValue; 
 			
-			public CharacteristicAndMatchs(Job beer, int matchValue) {
-				this.beer = beer;
+			public CharacteristicAndMatchs(Job job, int matchValue) {
+				this.job = job;
 				this.matchValue =matchValue;
 			}
-			public Job getBeer() {
-				return this.beer;
+			public Job getJob() {
+				return this.job;
 			}
 			
 			public int getMatchValue() {
@@ -48,19 +43,19 @@ public class SearchBeer extends SearchItems<CandidateUser, Job> {
 			}
 		}
 		
-		class SortbyBeer implements Comparator<Job> 
+		class SortbyJob implements Comparator<Job> 
 		{ 
 		    // Used for sorting in ascending order of 
 		    // roll number 
 			@Override
-			public int compare(Job b1, Job b2) {
+			public int compare(Job j1, Job j2) {
 				
-				double value = b1.getJobCharacteristic().getSalario() - b2.getJobCharacteristic().getSalario();
+				double value = j1.getJobCharacteristic().getSalario() - j2.getJobCharacteristic().getSalario();
 				
 				if(value < 0)
-					return -1;
-				if(value > 0)
 					return 1;
+				if(value > 0)
+					return -1;
 				else
 					return 0;
 			} 
@@ -69,9 +64,9 @@ public class SearchBeer extends SearchItems<CandidateUser, Job> {
 		List<CharacteristicAndMatchs> characteristicMatchs = new ArrayList<CharacteristicAndMatchs>();
 		List<Job> productsByUser = new ArrayList<Job>();
 		
-		Collections.sort(allBeers, new SortbyBeer());
+		Collections.sort(allJobs, new SortbyJob());
 		
-		for(Job p: allBeers) {
+		for(Job p: allJobs) {
 			
 			JobCharacteristic characteristicProduct = (JobCharacteristic) p.getJobCharacteristic();
 			int matchSize = this.countMatchs(characteristicUser, characteristicProduct);		
@@ -85,7 +80,7 @@ public class SearchBeer extends SearchItems<CandidateUser, Job> {
 		
 		for(CharacteristicAndMatchs c : characteristicMatchs) //armazenando apenas os produtos em productByUser
 		{
-			productsByUser.add(c.getBeer());
+			productsByUser.add(c.getJob());
 		}
 		
 		
@@ -93,18 +88,19 @@ public class SearchBeer extends SearchItems<CandidateUser, Job> {
 	}
 	
 	//Metodo auxiliar para contar os matchs das caracteristicas do produto com as do usuario
-	private int countMatchs(JobCharacteristic charaUser, JobCharacteristic charaBeer) {
+	private int countMatchs(JobCharacteristic charaUser, JobCharacteristic charaJob) {
 		int equal = 0;
 		
-		if(charaUser.getEscolaridade().equals(charaBeer.getEscolaridade()))
+		if(charaUser.getEscolaridade().equals(charaJob.getEscolaridade()))
 			equal += 2;
-		if(charaBeer.getSalario() <= charaUser.getSalario())
-			equal++;
-		
-		System.out.println(charaBeer.getEscolaridade());
-		System.out.println(charaBeer.getSalario());
-		System.out.println(equal);
-		System.out.println();
+		if(charaJob.getSalario() <= charaUser.getSalario())
+			equal +=1;
+		if(charaUser.getArea().equals(charaJob.getArea()))
+			equal += 3;
+		if(charaUser.getCargo().equals(charaJob.getCargo()))
+			equal += 4;
+		if(charaUser.getIdioma().equals(charaJob.getIdioma()))
+			equal += 1;
 		
 		return equal;
 	}

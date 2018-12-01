@@ -24,7 +24,16 @@ public class EmployerUser extends User {
 	@JsonInclude(Include.NON_NULL)
 	@Cascade(CascadeType.PERSIST)
 	@Column(unique = true)
-	String cnpj;
+	private String cnpj;
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+	
 	
 	/*
 	public JobCharacteristic getBeerCharacteristic() {
