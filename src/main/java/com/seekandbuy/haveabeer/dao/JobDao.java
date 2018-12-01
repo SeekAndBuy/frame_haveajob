@@ -15,6 +15,6 @@ import com.seekandbuy.haveabeer.domain.Product;
 @Repository
 public interface JobDao extends GenericDao, JpaRepository<Job, Long>
 {
-	@Query("SELECT p FROM Job p WHERE CANDIDATEID(p.Id) = CANDIDATE(:userId)")
-	public List<Job> getJobByCandidateId(@Param("userId") Long id);
+	@Query("SELECT p FROM Job p WHERE USERID(p.Id) = USERID(:userId)")
+	public List<Job> getJobByEmployerId(@Param("userId") Long id);
 }

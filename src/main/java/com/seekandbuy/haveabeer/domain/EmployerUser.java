@@ -1,8 +1,7 @@
 package com.seekandbuy.haveabeer.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -24,12 +23,7 @@ public class EmployerUser extends User {
 	
 	@JsonInclude(Include.NON_NULL)
 	@Cascade(CascadeType.PERSIST)
-	@ManyToOne
-	Job jobsOffered;
-	
-	@JsonInclude(Include.NON_NULL)
-	@Cascade(CascadeType.PERSIST)
-	@OneToOne
+	@Column(unique = true)
 	String cnpj;
 	
 	/*

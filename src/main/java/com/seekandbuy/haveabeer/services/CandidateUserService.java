@@ -1,6 +1,5 @@
 package com.seekandbuy.haveabeer.services;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,14 +8,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.seekandbuy.haveabeer.dao.CandidateUserDao;
-//import com.seekandbuy.haveabeer.dao.EmployerUserDao;
 import com.seekandbuy.haveabeer.domain.CandidateUser;
-//import com.seekandbuy.haveabeer.domain.EmployerUser;
 import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @Service
-public class CandidateUerService extends GenericService<CandidateUser>
+public class CandidateUserService extends GenericService<CandidateUser>
 {	
 	@Autowired
 	private CandidateUserDao candidateUserDao;
@@ -34,20 +31,12 @@ public class CandidateUerService extends GenericService<CandidateUser>
 		
 		if(user == null)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Candidate can not be found");
 		}
 		
 		return user;
 	}
-	
-	public static <T> List<T> toList(Optional<T> option) 
-	{
-	    if (option.isPresent())
-	        return Collections.singletonList(option.get());
-	    else
-	        return Collections.emptyList();
-	}
-		
+			
 	@Override
 	public CandidateUser createItem(CandidateUser user) 
 	{	
@@ -71,7 +60,7 @@ public class CandidateUerService extends GenericService<CandidateUser>
 		}
 		catch(EmptyResultDataAccessException e)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Candidate can not be found");
 		}
 	}
 	
@@ -108,7 +97,7 @@ public class CandidateUerService extends GenericService<CandidateUser>
 		
 		if(user == null)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Candidate can not be found");
 		}		
 		return user;
 	}

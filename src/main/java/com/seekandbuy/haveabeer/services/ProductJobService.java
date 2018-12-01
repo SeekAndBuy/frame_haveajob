@@ -95,9 +95,9 @@ public class ProductJobService extends GenericService<Job>
 		findItem(job.getId());
 	}
 	
-	public List<Job> getJobByCandidateId(Long id) 
+	public List<Job> getJobByEmployerId(Long id) 
 	{
-		return productDao.getJobByCandidateId(id);
+		return productDao.getJobByEmployerId(id);
 	}
 	
 }

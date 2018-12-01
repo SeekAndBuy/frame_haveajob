@@ -6,30 +6,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.seekandbuy.haveabeer.HaveabeerApplication;
 import com.seekandbuy.haveabeer.domain.Job;
 import com.seekandbuy.haveabeer.domain.CandidateUser;
-//import com.seekandbuy.haveabeer.domain.Product;
-//import com.seekandbuy.haveabeer.domain.User;
+
 import com.seekandbuy.haveabeer.exceptions.ProductNotFoundException;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 import com.seekandbuy.haveabeer.services.ProductJobService;
-import com.seekandbuy.haveabeer.services.CandidateUerService;
+import com.seekandbuy.haveabeer.services.CandidateUserService;
 
 
 @RestController
@@ -41,9 +36,9 @@ public class ProductJobResources implements GenericResources<Job>
 	private ProductJobService productService;
 	
 	@Autowired
-	private CandidateUerService userService;
+	private CandidateUserService userService;
 	
-	public ProductJobResources(ProductJobService productService, CandidateUerService userService) 
+	public ProductJobResources(ProductJobService productService, CandidateUserService userService) 
 	{
 		this.productService = productService;
 		this.userService = userService;
@@ -125,20 +120,20 @@ public class ProductJobResources implements GenericResources<Job>
 		return ResponseEntity.noContent().build();
 	}
 
-	@RequestMapping(value = "/candidate/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<Job>> getJobByCandidateId(@PathVariable("id") Long id){
-		List<Job> candidateJobsInterested = null;
+	@RequestMapping(value = "/employer/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Job>> getJobByEmployerId(@PathVariable("id") Long id){
+		List<Job> employerJobsOffered = null;
 		
 		try
 		{
-			candidateJobsInterested = productService.getJobByCandidateId(id);
+			employerJobsOffered = productService.getJobByEmployerId(id);
 		}
 		catch(UserNotFoundException e)
 		{
 			return ResponseEntity.notFound().build();
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(candidateJobsInterested);
+		return ResponseEntity.status(HttpStatus.OK).body(employerJobsOffered);
 	}
 	
 	@RequestMapping(value = "/bycharacteristics/{id}", method = RequestMethod.GET)

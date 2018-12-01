@@ -23,7 +23,7 @@ import com.seekandbuy.haveabeer.domain.CandidateUser;
 //import com.seekandbuy.haveabeer.domain.Product;
 import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
-import com.seekandbuy.haveabeer.services.CandidateUerService; 
+import com.seekandbuy.haveabeer.services.CandidateUserService; 
 
 
 @RestController
@@ -32,9 +32,9 @@ import com.seekandbuy.haveabeer.services.CandidateUerService;
 public class UserBeerResources implements GenericResources<CandidateUser>
 {	
 	@Autowired
-	private CandidateUerService userService;
+	private CandidateUserService userService;
 	
-	public UserBeerResources(CandidateUerService userService) 
+	public UserBeerResources(CandidateUserService userService) 
 	{
 		this.userService = userService;
 	}

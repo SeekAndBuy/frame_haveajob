@@ -16,7 +16,7 @@ import com.seekandbuy.haveabeer.domain.User;
 import com.seekandbuy.haveabeer.exceptions.UserNotFoundException;
 
 @Service
-public class EmployerUerService extends GenericService<EmployerUser>
+public class EmployerUserService extends GenericService<EmployerUser>
 {	
 	@Autowired
 	private EmployerUserDao employerUserDao;
@@ -34,7 +34,7 @@ public class EmployerUerService extends GenericService<EmployerUser>
 		
 		if(user == null)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Employer can not be found");
 		}
 		
 		return user;
@@ -71,7 +71,7 @@ public class EmployerUerService extends GenericService<EmployerUser>
 		}
 		catch(EmptyResultDataAccessException e)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Employer can not be found");
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class EmployerUerService extends GenericService<EmployerUser>
 		
 		if(user == null)
 		{
-			throw new UserNotFoundException("User can not be found");
+			throw new UserNotFoundException("Employer can not be found");
 		}		
 		return user;
 	}
