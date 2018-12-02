@@ -9,11 +9,13 @@ public class ValidatorJob implements Validator<Job>{
 		
 		if(job.getJobCharacteristic() == null)
 			return false;
+		
 		if(job.getDate() == null)
 			return false;
 		
 		if(job.getTituloDaVaga() == null)
 			return false;
+		
 		if(job.getAddress() == null)
 			return false;
 		

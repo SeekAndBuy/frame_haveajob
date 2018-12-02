@@ -24,7 +24,6 @@ import com.seekandbuy.haveajob.domain.User;
 import com.seekandbuy.haveajob.exceptions.UserNotFoundException;
 import com.seekandbuy.haveajob.services.CandidateUserService; 
 
-
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins="http://localhost:4200")

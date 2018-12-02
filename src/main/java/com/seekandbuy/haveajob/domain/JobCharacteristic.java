@@ -15,9 +15,6 @@ public class JobCharacteristic extends Characteristic{
 	private double salario;
 	
 	@JsonInclude(Include.NON_NULL)
-	private  String tituloDaVaga;
-	
-	@JsonInclude(Include.NON_NULL)
 	private  String area;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -32,14 +29,6 @@ public class JobCharacteristic extends Characteristic{
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
-	}
-
-	public String getTituloDaVaga() {
-		return tituloDaVaga;
-	}
-
-	public void setTituloDaVaga(String tituloDaVaga) {
-		this.tituloDaVaga = tituloDaVaga;
 	}
 
 	public String getArea() {

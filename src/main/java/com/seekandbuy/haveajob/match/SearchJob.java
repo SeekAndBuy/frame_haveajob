@@ -6,11 +6,9 @@ import com.seekandbuy.haveajob.domain.CandidateUser;
 import com.seekandbuy.haveajob.domain.Job;
 import com.seekandbuy.haveajob.domain.JobCharacteristic;
 
-//import com.seekandbuy.haveabeer.domain.Product;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//import java.util.Optional;
 
 public class SearchJob extends SearchItems<CandidateUser, Job> {
 	
@@ -18,7 +16,6 @@ public class SearchJob extends SearchItems<CandidateUser, Job> {
 	public List<Job> ListAllProductsByUser(CandidateUser user, List<Job> allJobs) {
 
 		JobCharacteristic characteristicUser = user.getJobCharacteristic();
-
 		
 		//classe para armazenar a tupla <product, quantidade de matchs>
 		class CharacteristicAndMatchs{

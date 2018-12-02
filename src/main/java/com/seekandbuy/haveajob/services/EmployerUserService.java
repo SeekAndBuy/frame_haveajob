@@ -12,12 +12,17 @@ import com.seekandbuy.haveajob.dao.EmployerUserDao;
 import com.seekandbuy.haveajob.domain.EmployerUser;
 import com.seekandbuy.haveajob.domain.User;
 import com.seekandbuy.haveajob.exceptions.UserNotFoundException;
+import com.seekandbuy.haveajob.validator.ValidatorEmployerUser;
 
 @Service
 public class EmployerUserService extends GenericService<EmployerUser>
 {	
 	@Autowired
 	private EmployerUserDao employerUserDao;
+	
+	public EmployerUserService() {
+		super.validateItem = new ValidatorEmployerUser();
+	}
 	
 	@Override
 	public List<EmployerUser> listItem()

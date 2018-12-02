@@ -25,7 +25,6 @@ import com.seekandbuy.haveajob.exceptions.UserNotFoundException;
 import com.seekandbuy.haveajob.services.CandidateUserService;
 import com.seekandbuy.haveajob.services.ProductJobService;
 
-
 @RestController
 @RequestMapping("/jobs")
 @CrossOrigin(origins="http://localhost:4200")
@@ -54,11 +53,13 @@ public class ProductJobResources implements GenericResources<Job>
 	public ResponseEntity<Void> createItem(@RequestBody Job product) {
 		boolean createProduct = productService.createItem(product);
 		
-		if(!createProduct)
+		if(!createProduct)	
+		{
+			System.out.println("XXXXXXXXXXXXXXX");
 			return ResponseEntity.badRequest().build();
-		
+		}
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
-				path("/{id}").buildAndExpand(product.getId()).toUri();
+		path("/{id}").buildAndExpand(product.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}

@@ -6,6 +6,7 @@ import com.seekandbuy.haveajob.domain.Job;
 import com.seekandbuy.haveajob.exceptions.ProductNotFoundException;
 import com.seekandbuy.haveajob.match.SearchJob;
 import com.seekandbuy.haveajob.notification.NotificationJob;
+import com.seekandbuy.haveajob.validator.ValidatorJob;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +24,12 @@ public class ProductJobService extends GenericService<Job>
 	@Autowired
 	private JobDao productDao;
 	
-	//MUDAR DEPOIS ----------------- Nome
 	SearchJob searchJob = new SearchJob();
+	
+	public ProductJobService()
+	{
+		super.validateItem = new ValidatorJob();
+	}
 	
 	public List<Job> listItemByUserCharacteristic(CandidateUser user, List<Job> allJobs){
 

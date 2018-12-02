@@ -10,7 +10,6 @@ import org.hibernate.annotations.CascadeType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-
 @Entity
 @Table(name="Job")
 public class Job extends Product {
